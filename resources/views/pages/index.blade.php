@@ -10,7 +10,7 @@ SayHello
     <div class="card text-white bg-info mb-3">
         <div class="card-body">
             <h3>Already have a account</h3>
-            <form action="signin" method="post">
+            <form action="{{route('signin')}}" method="post">
                 {{csrf_field()}}
                 <div class="form-row">
                     <div class="col">
@@ -35,7 +35,7 @@ SayHello
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
                     <h3>SignUp for Say Hello!</h3>
-                    <form action="signup" method="post">
+                    <form action="{{route('signup')}}" method="post">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="name">Name</label>

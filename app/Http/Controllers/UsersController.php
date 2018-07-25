@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -49,4 +52,27 @@ class UsersController extends Controller
         Auth::logout();
         return redirect()-> route('/');
     }
+
+    public function saveProfile(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required|max:120',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg'
+        ]);
+        $user = Auth::user();
+        $user->name = $request['name'];
+        $user->update();
+        $file = $request->file('image');
+        $filename = $request['name'].'_'.$user->id.'.jpg';
+        if($file){
+            Storage::disk('local')->put($filename, File::get($file));
+        }
+        return redirect()->route('profile');
+    }
+
+    public function fetchImage($filename){
+        $file = Storage::disk('local')->get($filename);
+        return new Response($file,200);
+    }
+
 }
