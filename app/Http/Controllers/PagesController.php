@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\User;
+use App\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

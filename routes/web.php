@@ -25,6 +25,7 @@ Route::group(['middleware' => ['web']], function (){
     Route::get('profileedit', 'PagesController@editProfile')->name('profile.edit')->middleware('auth');
     Route::post('/profilesave', 'UsersController@saveProfile')->name('profile.save')->middleware('auth');
     Route::get('/userimage/{filename}', 'UsersController@fetchImage')->name('profile.image')->middleware('auth');
+    Route::post('/like', 'PostController@likePost')->name('post.like')->middleware('auth');
 });
 
 
